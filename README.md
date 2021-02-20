@@ -4,4 +4,4 @@ I miss normal programming...
 
 ## Instructions
 
-1. just mew run smth IDK
+1. just mix run smth IDK
