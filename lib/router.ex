@@ -7,8 +7,20 @@ defmodule Router do
         Worker.start_link(1)
         Worker.start_link(2)
         Worker.start_link(3)
+        Worker.start_link(4)
+        Worker.start_link(5)
+        Worker.start_link(6)
+        Worker.start_link(7)
+        Worker.start_link(8)
+        Worker.start_link(9)
+        Worker.start_link(10)
+        Worker.start_link(11)
+        Worker.start_link(12)
+        Worker.start_link(13)
+        Worker.start_link(14)
+        Worker.start_link(15)
 
-        GenServer.start_link(__MODULE__, %{index: 0,worker_cardinal: 4}, name: :Router)
+        GenServer.start_link(__MODULE__, %{index: 0,worker_cardinal: 16}, name: :Router)
         
     end    
 
