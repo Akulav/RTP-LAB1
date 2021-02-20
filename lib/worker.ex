@@ -8,7 +8,9 @@ defmodule Worker do
     # end
 
     def start_link(index) do
-        GenServer.start_link(__MODULE__, 0, name: :Worker)
+        worker = "Worker"<>Integer.to_string(index)
+        #IO.inspect(worker)
+        GenServer.start_link(__MODULE__, 0, name: String.to_atom(worker))
     end    
 
     def handle_cast({:receive, tweet}, 0) do
