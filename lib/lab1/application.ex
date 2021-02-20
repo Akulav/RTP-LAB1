@@ -9,12 +9,16 @@ defmodule Lab1.Application do
   def start(_type, _args) do
     children = [
       # Starts a worker by calling: Lab1.Worker.start_link(arg)
-      # {Lab1.Worker, arg}
+      # {Lab1.hello, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
+    Router.start_link()
+    Connection.connect()
+    
     opts = [strategy: :one_for_one, name: Lab1.Supervisor]
     Supervisor.start_link(children, opts)
+
   end
 end
