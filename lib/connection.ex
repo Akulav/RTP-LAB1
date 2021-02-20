@@ -1,4 +1,4 @@
-defmodule Lab1 do
+defmodule Connection do
   @moduledoc """
   Documentation for `Lab1`.
   """
@@ -12,7 +12,10 @@ defmodule Lab1 do
       :world
 
   """
-  def hello do
-    :world
+
+  def connect() do
+    {:ok, _pid} = EventsourceEx.new("localhost:4000/tweets/1", stream_to: self())
+
+    flush
   end
 end
