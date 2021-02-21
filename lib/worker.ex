@@ -17,6 +17,7 @@ defmodule Worker do
     def handle_cast({:receive, tweet}, 0) do
 
         IO.inspect(tweet)
+        # new_tweet = Jaxon.Parser.parse(tweet)
         {:noreply, 0}
 
       end
@@ -26,5 +27,5 @@ defmodule Worker do
 
         {:ok, 0}
       end
-      
+
 end
