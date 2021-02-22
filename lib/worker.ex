@@ -1,33 +1,45 @@
 defmodule Worker do
     use GenServer
 
-
-    # def print(tweet) do
-    #     # IO.inspect(tweet)
-    #     GenServer.cast(__MODULE__,{:receive,tweet})
-    # end
-
+    #link this with that thingy...
     def start_link(index) do
-        IO.inspect("starting Worker"<>Integer.to_string(index))
         worker = "Worker"<>Integer.to_string(index)
         GenServer.start_link(__MODULE__, 0, [name: String.to_atom(worker)])
-
-    end    
+    end
 
     def handle_cast({:receive, tweet}, 0) do
+      #decode JSON
+        {:ok, decoded_tweet} = Poison.decode(tweet.data)
 
-        #  IO.inspect(tweet)
-        IO.inspect(Poison.decode!(tweet.data))
-        #Poison.decode!(tweet.data)
-        # new_tweet = Jaxon.Parser.parse(tweet)
+           # I actually like pipes..... functions are self-explanatory
+           score = decoded_tweet
+           |> prepare_string()
+           |> get_final_score()
+
+          #print sentiment score + the tweet itself
+          IO.inspect(score)
+          IO.inspect(decoded_tweet)
         {:noreply, 0}
-
       end
 
-
+      #must be here or it dies IDK
     def init(0) do
-
         {:ok, 0}
       end
+
+      #WIP - prepare the string for  calculations. Remove punctuation and extra spaces
+      def prepare_string(text) do
+        chars_to_remove = [".", ":", "!", "?", ","]
+        text["message"]["tweet"]["text"]
+        |> String.replace(chars_to_remove, "")
+        |>String.split(" ", trim: true)
+    end
+
+    #get sum_of_sentiments / number of words
+    def get_final_score(text) do
+      text
+      |> Enum.reduce(0, fn word, sum -> Sentimentlist.get(word) + sum end)
+      |> Kernel./(length(text))
+    end
 
 end
