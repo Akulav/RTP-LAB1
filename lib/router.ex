@@ -3,10 +3,11 @@ defmodule Router do
 
     def start_link() do
 
-        Worker.start_link(0)
-        Worker.start_link(1)
-        Worker.start_link(2)
-        Worker.start_link(3)
+        # Worker.start_link(0)
+        # Worker.start_link(1)
+        # Worker.start_link(2)
+        # Worker.start_link(3)
+        
         GenServer.start_link(__MODULE__, %{index: 0,worker_cardinal: 4}, name: :Router)   
 
     end    
