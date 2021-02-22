@@ -17,8 +17,8 @@ defmodule Worker do
     def handle_cast({:receive, tweet}, 0) do
 
         #  IO.inspect(tweet)
-        # IO.inspect(Poison.decode!(tweet.data))
-        Poison.decode!(tweet.data)
+        IO.inspect(Poison.decode!(tweet.data))
+        #Poison.decode!(tweet.data)
         # new_tweet = Jaxon.Parser.parse(tweet)
         {:noreply, 0}
 
