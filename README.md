@@ -6,6 +6,9 @@ I miss normal programming...
 
 1. mix run --no-halt (IDK why it needs --no-halt, but it works so yeah...)
 
-### Things id does:
+### Functionality:
 
-1. Not much. Round robin style and print. Maybe I still have time lol
+1. 4 Hard-coded workers (scalable) work in round-robin style.
+2. In case of failure workers will be restarted (like every problem in elixir)
+3. Sentiment analysis 
+4. Print analysis results + tweet

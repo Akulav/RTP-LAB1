@@ -37,9 +37,9 @@ defmodule Lab1.Application do
         id: Connection,
         start: {Connection, :connect, []}
       }
-      
+
     ]
-    
+
     # max number of restart 100 per 1 sec should be enough to never crash entirely, maybe...
     opts = [strategy: :one_for_one, name: Lab1.Supervisor, max_restarts: 100, max_seconds: 1]
     Supervisor.start_link(children, opts)

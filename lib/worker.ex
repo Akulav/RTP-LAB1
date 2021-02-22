@@ -4,12 +4,13 @@ defmodule Worker do
     #link this with that thingy...
     def start_link(index) do
         worker = "Worker"<>Integer.to_string(index)
-        GenServer.start_link(__MODULE__, 0, [name: String.to_atom(worker)])
+        GenServer.start_link(__MODULE__, 0, name: String.to_atom(worker))
     end
 
     def handle_cast({:receive, tweet}, 0) do
       #decode JSON
-        {:ok, decoded_tweet} = Poison.decode(tweet.data)
+
+          {:ok, decoded_tweet} = Poison.decode(tweet.data)
 
            # I actually like pipes..... functions are self-explanatory
            score = decoded_tweet
@@ -29,9 +30,8 @@ defmodule Worker do
 
       #WIP - prepare the string for  calculations. Remove punctuation and extra spaces
       def prepare_string(text) do
-        chars_to_remove = [".", ":", "!", "?", ","]
         text["message"]["tweet"]["text"]
-        |> String.replace(chars_to_remove, "")
+        |> String.replace([".", ":", "!", "?", ","], "")
         |>String.split(" ", trim: true)
     end
 
